@@ -3,4 +3,8 @@ public class Cuenta {
      int numero;
      String titular;
      double saldo;
+
+     void depositar(double valor){
+
+     }
 }
