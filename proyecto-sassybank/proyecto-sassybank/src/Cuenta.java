@@ -5,6 +5,6 @@ public class Cuenta {
      double saldo;
 
      void depositar(double valor){
-
+          saldo = saldo + valor;
      }
 }

@@ -3,6 +3,8 @@ public class PruebaMetodos {
         Cuenta cuentaRamon = new Cuenta();
 
         cuentaRamon.saldo = 500;
-        cuentaRamon.depositar(0);
+        cuentaRamon.depositar(300);
+
+        System.out.println(cuentaRamon.saldo);
     }
 }
