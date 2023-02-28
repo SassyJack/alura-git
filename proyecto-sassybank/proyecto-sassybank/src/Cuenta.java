@@ -4,7 +4,18 @@ public class Cuenta {
      String titular;
      double saldo;
 
-     void depositar(double valor){
-          saldo = saldo + valor;
+     public void depositar(double valor){
+          //El this esta es una referencia, es decir, "apunta" a un objeto.
+          this.saldo = this.saldo + valor;
+     }
+     public boolean retirar(double valor){
+               if (valor <= this.saldo) {
+                    this.saldo = this.saldo - valor;
+                    return true;
+               }
+               else{
+                    System.out.println("No hay fondos suficientes");
+                    return false;
+               }
      }
 }

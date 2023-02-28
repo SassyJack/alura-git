@@ -4,7 +4,8 @@ public class PruebaMetodos {
 
         cuentaRamon.saldo = 500;
         cuentaRamon.depositar(300);
-
+        System.out.println(cuentaRamon.saldo);
+        cuentaRamon.retirar(1000);
         System.out.println(cuentaRamon.saldo);
     }
 }
