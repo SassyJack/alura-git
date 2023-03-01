@@ -4,13 +4,13 @@ public class PruebaMetodos {
         Cuenta cuentaPipe = new Cuenta();
         cuentaRamon.depositar(500); 
         cuentaRamon.depositar(300);
-        System.out.println(cuentaRamon.obtenerSaldo());
+        System.out.println(cuentaRamon.getSaldo());
         cuentaRamon.retirar(1000);
-        System.out.println(cuentaRamon.obtenerSaldo());
+        System.out.println(cuentaRamon.getSaldo());
         cuentaPipe.depositar(10000);
         cuentaPipe.transferir(200,cuentaRamon);
-        System.out.println(cuentaPipe.obtenerSaldo());
-        System.out.println(cuentaRamon.obtenerSaldo());
+        System.out.println(cuentaPipe.getSaldo());
+        System.out.println(cuentaRamon.getSaldo());
 
         Cliente Ramon = new Cliente();
         cuentaRamon.titular = Ramon;

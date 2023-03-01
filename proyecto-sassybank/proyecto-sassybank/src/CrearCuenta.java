@@ -6,7 +6,11 @@ public class CrearCuenta {
         Cuenta segundaCuenta=new Cuenta();
         segundaCuenta.depositar(2000);
 
-        System.out.println(primeraCuenta.obtenerSaldo());
-        System.out.println(segundaCuenta.obtenerSaldo());
+        System.out.println(primeraCuenta.getSaldo());
+        System.out.println(segundaCuenta.getSaldo());
+        primeraCuenta.setAgencia(20);
+        primeraCuenta.setNumero(421341);
+        System.out.println(primeraCuenta.getAgencia());
+        System.out.println(primeraCuenta.getNumero());
     }
 }
