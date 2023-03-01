@@ -14,9 +14,9 @@ public class PruebaMetodos {
 
         Cliente Ramon = new Cliente();
         cuentaRamon.titular = Ramon;
-        Ramon.nombre = "Ramon";
-        System.out.println(Ramon.nombre);
-        System.out.println(cuentaRamon.titular.nombre);
+        Ramon.setNombre("Ramon");
+        System.out.println(Ramon.getNombre());
+        System.out.println(cuentaRamon.titular.getNombre());
         System.out.println(cuentaRamon.titular);
         System.out.println(Ramon);
     }
