@@ -13,11 +13,11 @@ public class PruebaMetodos {
         System.out.println(cuentaRamon.getSaldo());
 
         Cliente Ramon = new Cliente();
-        cuentaRamon.titular = Ramon;
+        cuentaRamon.setTitular(Ramon);
         Ramon.setNombre("Ramon");
         System.out.println(Ramon.getNombre());
-        System.out.println(cuentaRamon.titular.getNombre());
-        System.out.println(cuentaRamon.titular);
+        System.out.println(cuentaRamon.getTitular().getNombre());
+        System.out.println(cuentaRamon.getTitular());
         System.out.println(Ramon);
     }
 }

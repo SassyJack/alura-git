@@ -1,8 +1,15 @@
 public class Cuenta {
      private int agencia;
      private int numero;
-     Cliente titular = new Cliente();
+     private Cliente titular = new Cliente();
      private double saldo;
+
+     public Cliente getTitular() {
+          return titular;
+     }
+     public void setTitular(Cliente titular) {
+          this.titular = titular;
+     }
 
      public void depositar(double valor){
           //El this esta es una referencia, es decir, "apunta" a un objeto.
@@ -18,6 +25,7 @@ public class Cuenta {
                     return false;
                }
           }
+
      public boolean transferir(double valor, Cuenta cuenta) {
           if (valor <= this.saldo){
                this.saldo -= valor;
@@ -29,9 +37,11 @@ public class Cuenta {
                     return false;
           }
      }
+
      public double getSaldo () {
           return this.saldo;
      }
+
      public void setAgencia (int agencia) {
           if (agencia > 0 ){
                this.agencia = agencia;
@@ -40,6 +50,10 @@ public class Cuenta {
                System.out.println("Valor no valido");
           }
      }
+     public int getAgencia(){
+          return agencia;
+     }
+
      public void setNumero (int numero) {
           if (numero > 0 ){
                this.numero = numero;
@@ -48,9 +62,7 @@ public class Cuenta {
                System.out.println("Valor no valido");
           }
      }
-     public int getAgencia(){
-          return agencia;
-     }
+     
      public int getNumero(){
           return numero;
      }
