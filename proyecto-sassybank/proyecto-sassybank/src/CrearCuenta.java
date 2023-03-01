@@ -12,5 +12,6 @@ public class CrearCuenta {
         primeraCuenta.setNumero(421341);
         System.out.println(primeraCuenta.getAgencia());
         System.out.println(primeraCuenta.getNumero());
+        System.out.println(Cuenta.getTotal());
     }
 }

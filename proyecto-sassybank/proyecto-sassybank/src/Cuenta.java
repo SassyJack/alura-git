@@ -3,7 +3,14 @@ public class Cuenta {
      private int numero;
      private Cliente titular = new Cliente();
      private double saldo;
+     private static int total;
 
+     Cuenta (){
+          total ++;
+     }
+     public static int getTotal() {
+         return total;
+     }
      public Cliente getTitular() {
           return titular;
      }
