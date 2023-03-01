@@ -1,8 +1,8 @@
 public class Cuenta {
      int agencia;
      int numero;
-     Cliente titular;
-     double saldo;
+     Cliente titular = new Cliente();
+     private double saldo;
 
      public void depositar(double valor){
           //El this esta es una referencia, es decir, "apunta" a un objeto.
@@ -28,6 +28,9 @@ public class Cuenta {
                System.out.println("No hay fondos suficientes");
                     return false;
           }
+     }
+     public double obtenerSaldo () {
+          return this.saldo;
      }
      
 }
