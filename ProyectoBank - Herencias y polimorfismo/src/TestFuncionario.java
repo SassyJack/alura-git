@@ -1,6 +1,6 @@
 public class TestFuncionario {
     public static void main(String[] args) {
-        Funcionario funcionario1 = new Funcionario();
+        Funcionario funcionario1 = new Programador();
         ControlSalario controlSalario = new ControlSalario();
         Gerente gerente1 = new Gerente();
 
