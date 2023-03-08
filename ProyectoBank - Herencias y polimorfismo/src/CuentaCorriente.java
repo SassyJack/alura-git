@@ -4,6 +4,10 @@ public class CuentaCorriente extends Cuenta {
         super(agencia, numero);
     }
 
+    @Override
+    public void depositar(double valor) {
+        super.saldo += valor;
+    }
     
     @Override
     public boolean transferir(double valor, Cuenta cuenta) {

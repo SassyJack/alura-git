@@ -1,8 +1,8 @@
-public class Cuenta {
+public abstract class Cuenta {
      private int agencia;
      private int numero;
      private Cliente titular = new Cliente();
-     private double saldo;
+     protected double saldo;
      private static int total;
 
      Cuenta (int agencia, int numero){
@@ -20,10 +20,9 @@ public class Cuenta {
           this.titular = titular;
      }
 
-     public void depositar(double valor){
-          //El this esta es una referencia, es decir, "apunta" a un objeto.
-          this.saldo += valor;
-     }
+     public abstract void depositar(double valor);
+
+
      public boolean retirar(double valor){
                if (valor <= this.saldo) {
                     this.saldo -= valor;
