@@ -5,7 +5,9 @@ public class Cuenta {
      private double saldo;
      private static int total;
 
-     Cuenta (){
+     Cuenta (int agencia, int numero){
+          this.agencia = agencia;
+          this.numero = numero;
           total ++;
      }
      public static int getTotal() {
