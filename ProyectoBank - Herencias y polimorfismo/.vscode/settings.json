@@ -5,7 +5,10 @@
         "lib/**/*.jar"
     ],
     "cSpell.words": [
+        "Alura",
+        "Autenticable",
         "Bonificacion",
-        "comision"
+        "comision",
+        "Sesion"
     ]
 }
