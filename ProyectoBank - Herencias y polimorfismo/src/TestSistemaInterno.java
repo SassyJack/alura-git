@@ -4,7 +4,11 @@ public class TestSistemaInterno {
         Gerente gerente = new Gerente();
         Administrador admin = new Administrador();
 
+        gerente.setClave("AluraCursos");
+
         sistema.autenticar(gerente);
         sistema.autenticar(admin);
+
+        System.out.println(gerente.iniciarSesion("AluraCursos"));
     }
 }
