@@ -8,7 +8,5 @@ public class TestSistemaInterno {
 
         sistema.autenticar(gerente);
         sistema.autenticar(admin);
-
-        System.out.println(gerente.iniciarSesion("AluraCursos"));
     }
 }
