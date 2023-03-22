@@ -16,5 +16,6 @@ public class Clase5 {
         cursos.add(curso4);
         Collections.sort(cursos,Collections.reverseOrder());
         System.out.println(cursos);
+        System.out.println(cursos.stream().mapToInt(Curso::getTiempo).sum());
 }
 }
