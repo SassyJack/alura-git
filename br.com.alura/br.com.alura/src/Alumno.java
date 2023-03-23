@@ -1,8 +1,12 @@
-public class Alumno {
-    private String nombre;
-    private int codigo;
+package com.alura.model;
 
-    public Alumno(String nombre, int codigo) {
+public class Alumno {
+
+    private String nombre;
+
+    private String codigo;
+
+    public Alumno(String nombre, String codigo) {
         this.nombre = nombre;
         this.codigo = codigo;
     }
@@ -11,16 +15,8 @@ public class Alumno {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 
     @Override
@@ -29,14 +25,13 @@ public class Alumno {
     }
 
     @Override
-    public boolean equals (Object obj){
+    public boolean equals(Object obj) {
         Alumno alumno = (Alumno) obj;
         return this.nombre.equals(alumno.getNombre());
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.nombre.hashCode();
     }
-    
 }
