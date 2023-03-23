@@ -1,4 +1,4 @@
-package com.alura.model;
+
 
 public class Alumno {
 
