@@ -16,10 +16,22 @@ public class ProductoController {
 	private Statement Statement;
 	private ResultSet Result;
 
-	public void modificar(String nombre, String descripcion, Integer id) {
-		// TODO
+	public int modificar(String nombre, String descripcion, Integer cantidad, Integer id) throws SQLException {
+		
+		Connection con =  new ConnectionFactory().recuperarConnection();
+		Statement statement = con.createStatement();
+		statement.execute("UPDATE PRODUCTO SET "
+				+ " NOMBRE = '" + nombre + "'"
+				+ ", DESCRIPCION = '" + descripcion + "'"
+				+ ", CANTIDAD = " + cantidad
+				+ " WHERE ID = " + id);
+	
+		int updateCount = statement.getUpdateCount();
+	
+		con.close();   
+	
+		return updateCount;
 	}
-
 	public int eliminar(Integer id) throws SQLException {
 		Connection con = new ConnectionFactory().recuperarConnection();
 		Statement statement = con.createStatement();
