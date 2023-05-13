@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Optional;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -57,6 +59,7 @@ public class ControlDeStockFrame extends JFrame {
         modelo.addColumn("Identificador del Producto");
         modelo.addColumn("Nombre del Producto");
         modelo.addColumn("Descripción del Producto");
+        modelo.addColumn("Cantidad del Producto");
 
         try {
             cargarTabla();
@@ -136,7 +139,12 @@ public class ControlDeStockFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 guardar();
                 limpiarTabla();
-                cargarTabla();
+                try {
+                    cargarTabla();
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -150,7 +158,12 @@ public class ControlDeStockFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 eliminar();
                 limpiarTabla();
-                cargarTabla();
+                try {
+                    cargarTabla();
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -158,7 +171,12 @@ public class ControlDeStockFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 modificar();
                 limpiarTabla();
-                cargarTabla();
+                try {
+                    cargarTabla();
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -205,7 +223,7 @@ public class ControlDeStockFrame extends JFrame {
 
         Optional.ofNullable(modelo.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn()))
                 .ifPresentOrElse(fila -> {
-                    Integer id = (Integer) modelo.getValueAt(tabla.getSelectedRow(), 0);
+                    Integer id = Integer.valueOf( modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
 
                     this.productoController.eliminar(id);
 
@@ -218,16 +236,16 @@ public class ControlDeStockFrame extends JFrame {
     private void cargarTabla() throws Exception {
         try {
             var productos = this.productoController.listar();
-            } catch (SQLException e) {
-            throw new Exception(e);
-            }
             try {
-                // TODO
-                // productos.forEach(producto -> modelo.addRow(new Object[] { "id", "nombre",
-                // "descripcion" }));
+                productos.forEach(producto -> modelo.addRow(new Object[] { producto.get("ID"), producto.get("NOMBRE"),
+                producto.get("DESCRIPCION"), producto.get("CANTIDAD") }));
             } catch (Exception e) {
                 throw e;
             }
+            } catch (SQLException e) {
+            throw new Exception(e);
+            }
+            
         
     }
 
@@ -248,10 +266,17 @@ public class ControlDeStockFrame extends JFrame {
         }
 
         // TODO
-        var producto = new Object[] { textoNombre.getText(), textoDescripcion.getText(), cantidadInt };
+        var producto = new HashMap<String, String>();
+        producto.put("NOMBRE", textoNombre.getText());
+        producto.put("DESCRIPCION", textoDescripcion.getText());
+        producto.put("CANTIDAD", String.valueOf(cantidadInt)); 
         var categoria = comboCategoria.getSelectedItem();
 
-        this.productoController.guardar(producto);
+        try {
+            this.productoController.guardar(producto);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 
