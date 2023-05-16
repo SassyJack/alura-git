@@ -1,6 +1,6 @@
 package com.alura.jdbc.modelo;
 
-public class producto {
+public class Producto {
     
     private Integer id;
     private String nombre;
@@ -23,7 +23,7 @@ public class producto {
         return cantidad;
     }
 
-    public producto(String nombre, String descripcion, Integer cantidad) {
+    public Producto(String nombre, String descripcion, Integer cantidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;

@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import com.alura.jdbc.controller.CategoriaController;
 import com.alura.jdbc.controller.ProductoController;
 import com.alura.jdbc.factory.ConnectionFactory;
-import com.alura.jdbc.modelo.producto;
+import com.alura.jdbc.modelo.Producto;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -283,7 +283,7 @@ public class ControlDeStockFrame extends JFrame {
             return;
         }
 
-        var producto = new producto(textoNombre.getText(),textoDescripcion.getText(),cantidadInt);
+        var producto = new Producto(textoNombre.getText(),textoDescripcion.getText(),cantidadInt);
         
 
         try {

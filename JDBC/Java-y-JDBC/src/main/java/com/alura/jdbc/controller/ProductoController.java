@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alura.jdbc.factory.ConnectionFactory;
-import com.alura.jdbc.modelo.producto;
+import com.alura.jdbc.modelo.Producto;
 
 public class ProductoController {
 
@@ -74,7 +74,7 @@ public class ProductoController {
 	}
 }
 
-    public void guardar(producto producto) throws SQLException {
+    public void guardar(Producto producto) throws SQLException {
 		String nombre = producto.getNombre();
 		String descripcion = producto.getDescripcion();
 		Integer cantidad = producto.getCantidad();
@@ -94,7 +94,7 @@ public class ProductoController {
 	}
 
 
-	private void ejecutarRegistro(producto producto, PreparedStatement statement)
+	private void ejecutarRegistro(Producto producto, PreparedStatement statement)
 			throws SQLException {
 		statement.setString(1, producto.getNombre());
 		statement.setString(2, producto.getDescripcion());
