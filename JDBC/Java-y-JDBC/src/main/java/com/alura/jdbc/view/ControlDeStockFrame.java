@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Optional;
 
-import javax.management.RuntimeErrorException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,14 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 import com.alura.jdbc.controller.CategoriaController;
 import com.alura.jdbc.controller.ProductoController;
-import com.alura.jdbc.factory.ConnectionFactory;
 import com.alura.jdbc.modelo.Producto;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ControlDeStockFrame extends JFrame {
 
@@ -41,11 +34,12 @@ public class ControlDeStockFrame extends JFrame {
     private ProductoController productoController;
     private CategoriaController categoriaController;
 
-    public ControlDeStockFrame() {
+    public ControlDeStockFrame() throws SQLException {
         super("Productos");
 
         this.categoriaController = new CategoriaController();
         this.productoController = new ProductoController();
+        
 
         Container container = getContentPane();
         setLayout(null);
@@ -65,11 +59,9 @@ public class ControlDeStockFrame extends JFrame {
         modelo.addColumn("Nombre del Producto");
         modelo.addColumn("Descripción del Producto");
         modelo.addColumn("Cantidad del Producto");
-
-        try {
+            try{
             cargarTabla();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -113,7 +105,6 @@ public class ControlDeStockFrame extends JFrame {
         comboCategoria = new JComboBox<>();
         comboCategoria.addItem("Elige una Categoría");
 
-        // TODO
         var categorias = this.categoriaController.listar();
         // categorias.forEach(categoria -> comboCategoria.addItem(categoria));
 
@@ -144,11 +135,7 @@ public class ControlDeStockFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 guardar();
                 limpiarTabla();
-                try {
-                    cargarTabla();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
+                cargarTabla();
             }
         });
 
@@ -215,15 +202,7 @@ public class ControlDeStockFrame extends JFrame {
                     String nombre = (String) modelo.getValueAt(tabla.getSelectedRow(), 1);
                     String descripcion = (String) modelo.getValueAt(tabla.getSelectedRow(), 2);
                     Integer cantidad = Integer.valueOf(modelo.getValueAt(tabla.getSelectedRow(), 3).toString());
-    
-                    int filasModificadas;
-    
-                    try {
-                        filasModificadas = this.productoController.modificar(nombre, descripcion, cantidad, id);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        throw new RuntimeException(e);
-                    }
+                    var filasModificadas = this.productoController.modificar(nombre, descripcion, cantidad, id);
     
                     JOptionPane.showMessageDialog(this, String.format("%d item modificado con éxito!", filasModificadas));
                 }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
@@ -234,37 +213,23 @@ public class ControlDeStockFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, elije un item");
             return;
         }
-
+    
         Optional.ofNullable(modelo.getValueAt(tabla.getSelectedRow(), tabla.getSelectedColumn()))
                 .ifPresentOrElse(fila -> {
                     Integer id = Integer.valueOf(modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
-                    int cantidadEliminada;
-                    try {
-                        cantidadEliminada = this.productoController.eliminar(id);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    var filasModificadas = this.productoController.eliminar(id);
+    
                     modelo.removeRow(tabla.getSelectedRow());
-
-                    JOptionPane.showMessageDialog(this, cantidadEliminada + " Item eliminado con éxito!");
+                    JOptionPane.showMessageDialog(this,
+                            String.format("%d item eliminado con éxito!", filasModificadas));
                 }, () -> JOptionPane.showMessageDialog(this, "Por favor, elije un item"));
     }
 
-    private void cargarTabla() throws Exception {
-        try {
-            var productos = this.productoController.listar();
-            try {
-                productos.forEach(producto -> modelo.addRow(new Object[] { producto.get("ID"), producto.get("NOMBRE"),
-                producto.get("DESCRIPCION"), producto.get("CANTIDAD") }));
-            } catch (Exception e) {
-                throw e;
-            }
-            } catch (SQLException e) {
-            throw new Exception(e);
-            }
-            
+    private void cargarTabla() {
         
+            var productos = productoController.listar();
+                productos.forEach(producto -> modelo.addRow(new Object[] {producto.getId(), producto.getNombre(),
+                producto.getDescripcion(), producto.getCantidad() }));     
     }
 
     private void guardar() {
@@ -284,14 +249,9 @@ public class ControlDeStockFrame extends JFrame {
         }
 
         var producto = new Producto(textoNombre.getText(),textoDescripcion.getText(),cantidadInt);
-        
 
-        try {
             this.productoController.guardar(producto);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 
         this.limpiarFormulario();
