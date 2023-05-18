@@ -8,8 +8,7 @@ import com.alura.jdbc.factory.ConnectionFactory;
 public class PruebaConexion {
 
     public static void main(String[] args) throws SQLException {
-        ConnectionFactory factory = new ConnectionFactory();
-        Connection con = factory.recuperaConexion();
+        Connection con = new ConnectionFactory().recuperarConnection();
 
         System.out.println("Cerrando la conexión");
 
